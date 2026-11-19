@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": true,
+    "types": ["vite/client", "vite-plugin-pwa/react"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/db/test-db.ts",
+    "src/test-utils.tsx",
+    "src/test-setup.ts",
+    "src/sync/test-sync-server.ts"
+  ],
+  "references": [{ "path": "../../packages/shared" }]
+}

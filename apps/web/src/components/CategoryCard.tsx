@@ -1,0 +1,50 @@
+import { useNavigate } from 'react-router-dom'
+import { Card } from './Card'
+import { AmountDisplay } from './AmountDisplay'
+import { useRoutePrefix } from '../demo/demo-context'
+
+interface CategoryCardProps {
+  id: string
+  name: string
+  color: string
+  total: number
+  count: number
+  currency: string
+  routeType: 'personal' | 'business'
+  cursored?: boolean
+}
+
+export function CategoryCard({
+  id,
+  name,
+  color,
+  total,
+  count,
+  currency,
+  routeType,
+  cursored = false,
+}: CategoryCardProps) {
+  const navigate = useNavigate()
+  const prefix = useRoutePrefix()
+
+  return (
+    <Card
+      onClick={() => navigate(`${prefix}/${routeType}/category/${id}`)}
+      cursorId={id}
+      cursored={cursored}
+    >
+      <div className="flex items-start justify-between">
+        <div className="flex items-center gap-2">
+          <span className="inline-block h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
+          <h3 className="font-medium text-text-primary">{name}</h3>
+        </div>
+        <span className="text-xs text-text-muted">
+          {count} {count === 1 ? 'expense' : 'expenses'}
+        </span>
+      </div>
+      <div className="mt-4">
+        <AmountDisplay amount={total} currency={currency} size="lg" />
+      </div>
+    </Card>
+  )
+}
